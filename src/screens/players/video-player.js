@@ -14,25 +14,9 @@ import {useRef, useState} from "react";
 import {TouchableIcon} from "../../components/TouchIcon";
 import Thumbnail from "./../../../assets/resources/thumbnail.jpg";
 import ChannelIcon from "./../../../assets/icon.png"
+import {PlaylistVideo} from "../../components/PlaylistVideo";
 
-const PlaylistVideo = ({name, channel, views, image}) => {
-    return (
-        <View style={styles.playlistVideo}>
-            <Image source={image} style={styles.playlistThumbnail} resizeMode="cover"/>
-            <View style={styles.playlistText}>
-                <Text style={styles.playlistVideoTitle}>
-                    {name}
-                </Text>
-                <Text style={styles.playlistSubText}>
-                    {channel}
-                </Text>
-                <Text style={styles.playlistSubText}>
-                    {views} views
-                </Text>
-            </View>
-        </View>
-    );
-};
+
 export const VideoPlayer = ({navigation}) => {
     const {width, height: screenHeight} = Dimensions.get('window')
     const videoHeight = width * 0.5625;
@@ -130,10 +114,6 @@ export const VideoPlayer = ({navigation}) => {
     };
     const player = useRef(null)
     return (
-        <View style={styles.container}>
-            <TouchableOpacity onPress={handleOpen}>
-                <Text>Content Below: Click To Reopen Video</Text>
-            </TouchableOpacity>
             <View style={StyleSheet.absoluteFill}>
                 <Animated.View style={[{width, height: videoHeight, ...videoStyles}]} {...panResponder.panHandlers}>
                     <Video
@@ -227,7 +207,6 @@ export const VideoPlayer = ({navigation}) => {
                     </View>
                 </Animated.ScrollView>
             </View>
-        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -276,29 +255,5 @@ const styles = StyleSheet.create({
     channelTitle: {
         fontSize: 18,
         marginBottom: 5,
-    },
-    playlistUpNext: {
-        fontSize: 24,
-    },
-    playlistVideo: {
-        flexDirection: "row",
-        height: 100,
-        marginTop: 15,
-        marginBottom: 15,
-    },
-    playlistThumbnail: {
-        width: null,
-        height: null,
-        flex: 1,
-    },
-    playlistText: {
-        flex: 2,
-        paddingLeft: 15,
-    },
-    playlistVideoTitle: {
-        fontSize: 18,
-    },
-    playlistSubText: {
-        color: "#555",
-    },
+    }
 });
